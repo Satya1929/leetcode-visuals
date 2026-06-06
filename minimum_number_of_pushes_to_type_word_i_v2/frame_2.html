@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 48px 64px; background: #262626; border: 1px solid #404040; position: relative; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .derivation-container {
+            background: #171717; border: 1px solid #525252; border-radius: 12px; padding: 32px;
+            display: flex; flex-direction: column; gap: 24px;
+        }
+        
+        .step { display: flex; align-items: center; gap: 24px; }
+        .step-label { font-size: 0.9rem; font-weight: 700; color: #a3a3a3; width: 140px; text-align: right; text-transform: uppercase; }
+        
+        .equation { font-size: 1.4rem; font-weight: 800; font-family: 'Courier New', Courier, monospace; color: #d4d4d4; }
+        
+        .highlight-green { color: #4ade80; }
+        .highlight-blue { color: #60a5fa; }
+        .highlight-purple { color: #c084fc; }
+        
+        .divider { height: 1px; background: #404040; width: 100%; margin: 8px 0; }
+        
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">CLOSED-FORM ALGEBRAIC COLLAPSE</div>
+        
+        <div class="derivation-container">
+            <div class="step">
+                <div class="step-label">Arithmetic Series</div>
+                <div class="equation">8 × <span class="highlight-green">q(q+1) / 2</span> + <span class="highlight-blue">r(q+1)</span></div>
+            </div>
+            
+            <div class="step">
+                <div class="step-label">Simplify</div>
+                <div class="equation"><span class="highlight-green">4q(q+1)</span> + <span class="highlight-blue">r(q+1)</span></div>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="step">
+                <div class="step-label" style="color: #e5e7eb;">Factor (q+1)</div>
+                <div class="equation highlight-purple" style="font-size: 1.8rem;">(q + 1)(4q + r)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
