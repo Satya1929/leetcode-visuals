@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 48px 64px; background: #262626; border: 1px solid #404040; position: relative; align-items: center; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .math-box {
+            background: #171717;
+            border: 2px solid #525252;
+            padding: 32px 48px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .formula {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #4ade80;
+            font-family: 'Courier New', Courier, monospace;
+            letter-spacing: -0.05em;
+        }
+        
+        .index-var { color: #60a5fa; }
+        
+        .explanation {
+            margin-top: 24px;
+            font-size: 1.1rem;
+            color: #a3a3a3;
+            line-height: 1.6;
+        }
+        
+        .highlight { color: #ffffff; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">THE MATHEMATICAL SHORTCUT</div>
+        
+        <div class="math-box">
+            <div class="formula">
+                cost = (<span class="index-var">i</span> / 8) + 1
+            </div>
+            
+            <div class="explanation">
+                For character at <span class="highlight">index i</span> (0-indexed):<br>
+                Indices <span class="highlight text-green-400">0 to 7</span> &rarr; (0/8)+1 = 1 push<br>
+                Indices <span class="highlight text-blue-400">8 to 15</span> &rarr; (8/8)+1 = 2 pushes<br>
+                Indices <span class="highlight text-purple-400">16 to 23</span> &rarr; (16/8)+1 = 3 pushes
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .push-row { display: flex; align-items: center; gap: 24px; }
+        .push-label { font-size: 1rem; font-weight: 700; color: #9ca3af; width: 100px; text-align: right; }
+        .blocks-container { display: flex; gap: 8px; }
+        
+        .char-block { 
+            width: 48px; height: 48px; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem;
+            border-radius: 8px;
+        }
+        .cost-1 { background: #166534; color: #4ade80; border: 2px solid #22c55e; }
+        .cost-2 { background: #1e3a8a; color: #60a5fa; border: 2px solid #3b82f6; }
+        .cost-3 { background: #701a75; color: #e879f9; border: 2px solid #d946ef; }
+        .cost-4 { background: #7f1d1d; color: #f87171; border: 2px solid #ef4444; }
+        
+        .key-label { font-size: 0.6rem; font-weight: 600; opacity: 0.8; margin-top: -2px; }
+        
+        .legend { font-size: 1.1rem; font-weight: 800; color: #4ade80; text-align: center; margin-top: 16px; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">GREEDY KEYPAD ASSIGNMENT</div>
+        
+        <div class="push-row">
+            <div class="push-label text-green-400">1 PUSH</div>
+            <div class="blocks-container">
+                <!-- 8 blocks -->
+                <div class="char-block cost-1"><div>L1</div><div class="key-label">Key 2</div></div>
+                <div class="char-block cost-1"><div>L2</div><div class="key-label">Key 3</div></div>
+                <div class="char-block cost-1"><div>L3</div><div class="key-label">Key 4</div></div>
+                <div class="char-block cost-1"><div>L4</div><div class="key-label">Key 5</div></div>
+                <div class="char-block cost-1"><div>L5</div><div class="key-label">Key 6</div></div>
+                <div class="char-block cost-1"><div>L6</div><div class="key-label">Key 7</div></div>
+                <div class="char-block cost-1"><div>L7</div><div class="key-label">Key 8</div></div>
+                <div class="char-block cost-1"><div>L8</div><div class="key-label">Key 9</div></div>
+            </div>
+        </div>
+        
+        <div class="push-row">
+            <div class="push-label text-blue-400">2 PUSHES</div>
+            <div class="blocks-container">
+                <!-- 8 blocks -->
+                <div class="char-block cost-2"><div>L9</div><div class="key-label">Key 2</div></div>
+                <div class="char-block cost-2"><div>L10</div><div class="key-label">Key 3</div></div>
+                <div class="char-block cost-2"><div>L11</div><div class="key-label">Key 4</div></div>
+                <div class="char-block cost-2"><div>L12</div><div class="key-label">Key 5</div></div>
+                <div class="char-block cost-2"><div>L13</div><div class="key-label">Key 6</div></div>
+                <div class="char-block cost-2"><div>L14</div><div class="key-label">Key 7</div></div>
+                <div class="char-block cost-2"><div>L15</div><div class="key-label">Key 8</div></div>
+                <div class="char-block cost-2"><div>L16</div><div class="key-label">Key 9</div></div>
+            </div>
+        </div>
+
+        <div class="push-row">
+            <div class="push-label text-purple-400">3 PUSHES</div>
+            <div class="blocks-container">
+                <!-- 8 blocks -->
+                <div class="char-block cost-3"><div>L17</div><div class="key-label">Key 2</div></div>
+                <div class="char-block cost-3"><div>L18</div><div class="key-label">Key 3</div></div>
+                <div class="char-block cost-3"><div>L19</div><div class="key-label">Key 4</div></div>
+                <div class="char-block cost-3"><div>...</div></div>
+            </div>
+        </div>
+        
+        <div class="legend" style="color: #ffffff;">Always fill cheaper slots first!</div>
+    </div>
+</body>
+</html>
