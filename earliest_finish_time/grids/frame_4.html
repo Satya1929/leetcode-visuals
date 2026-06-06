@@ -6,8 +6,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: transparent; display: inline-block; padding: 20px; color: #e5e7eb; }
-        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border-radius: 12px; border: 1px solid #404040; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); position: relative;}
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative;}
         .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
         
         .matrix-container { display: flex; gap: 16px; align-items: flex-end; position: relative; }
@@ -47,7 +47,6 @@
     <div class="frame">
         <div class="title">SCENARIO A: LAND -> WATER</div>
         <div class="stacked">
-            <!-- Sync Lines -->
             <div class="sync-line sync-line-land" style="left: calc(138px + 128px); top: -20px; bottom: -20px;"></div>
             <div class="sync-line sync-line-highlight" style="left: calc(138px + 192px); top: -20px; bottom: -20px;"></div>
             
@@ -68,7 +67,7 @@
                 <div class="grid-header" style="grid-template-columns: repeat(10, 32px);">
                     <div class="grid-header-col">1</div><div class="grid-header-col">2</div><div class="grid-header-col">3</div><div class="grid-header-col">4</div><div class="grid-header-col">5</div><div class="grid-header-col">6</div><div class="grid-header-col">7</div><div class="grid-header-col">8</div><div class="grid-header-col">9</div><div class="grid-header-col">10</div>
                 </div>
-                <div class="grid-body" style="grid-template-columns: repeat(10, 32px); grid-template-rows: repeat(5, 32px);">
+                <div class="grid-body" style="grid-template-columns: repeat(10, 32px); grid-template-rows: repeat(4, 32px);">
                         <div class="grid-row">
                         <div class="grid-cell block-land"></div>
                         <div class="grid-cell block-land"></div>
