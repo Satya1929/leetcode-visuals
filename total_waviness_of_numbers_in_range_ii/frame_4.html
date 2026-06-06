@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; width: 800px; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .data-table { width: 100%; border-collapse: collapse; text-align: center; font-size: 1rem; }
+        .data-table th { color: #9ca3af; font-weight: 600; padding: 12px; border-bottom: 2px solid #525252; text-transform: uppercase; letter-spacing: 0.05em; }
+        .data-table td { padding: 16px 12px; border-bottom: 1px solid #404040; color: #d4d4d4; }
+        
+        .text-prefix { color: #f59e0b; font-weight: 700; }
+        .text-cur { color: #2563eb; font-weight: 700; }
+        .text-suf { color: #16a34a; font-weight: 700; }
+        .text-highlight { color: #ffffff; font-weight: 700; }
+        
+        .formula-box { background: #171717; border: 1px solid #eab308; border-left: 4px solid #eab308; padding: 16px; color: #d4d4d4; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">Case 2: Current Digits == Pattern</div>
+        <p style="text-align: center; color: #9ca3af; margin-bottom: 16px;">Target: <strong>45 120 3</strong> | Pattern: <strong>120</strong> | <span class="text-cur">120 == 120</span></p>
+
+        <table class="data-table">
+            <tr>
+                <th>Prefix Choices</th>
+                <th>Pattern Fixed</th>
+                <th>Suffix Choices</th>
+                <th>Valid?</th>
+            </tr>
+            <tr>
+                <td><span class="text-prefix">00</span> to <span class="text-prefix">44</span></td>
+                <td><span class="text-cur">120</span></td>
+                <td><span class="text-suf">0</span> to <span class="text-suf">9</span></td>
+                <td style="color: #4ade80;">Yes (Well under limit)</td>
+            </tr>
+            <tr>
+                <td><span class="text-prefix">45</span></td>
+                <td><span class="text-cur">120</span></td>
+                <td><span class="text-suf">0</span> to <span class="text-suf">3</span></td>
+                <td style="color: #eab308;">Partial (Suffix constrained)</td>
+            </tr>
+        </table>
+        
+        <div class="formula-box">
+            <div><span class="text-highlight">Ways</span> = (<span class="text-prefix">pre</span> - t) &times; <span class="text-suf">mult</span> + (<span class="text-suf">suf</span> + 1)</div>
+            <div style="margin-top: 8px; font-size: 0.9rem; color: #9ca3af;">For prefix 45, the suffix can only go up to 3 to stay under 451203.</div>
+        </div>
+    </div>
+</body>
+</html>

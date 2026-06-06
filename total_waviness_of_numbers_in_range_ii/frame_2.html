@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; width: 800px; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .array-container { display: flex; gap: 4px; justify-content: center; align-items: center; margin-top: 16px; }
+        .array-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 48px; height: 56px; background: #171717; font-size: 1.5rem; font-weight: 700; color: #d4d4d4; }
+        
+        .group-prefix { border-bottom: 4px solid #f59e0b; }
+        .group-cur { border-bottom: 4px solid #2563eb; }
+        .group-suf { border-bottom: 4px solid #16a34a; }
+        
+        .bracket-label { text-align: center; font-size: 0.9rem; font-weight: 700; margin-top: 8px; }
+        .text-prefix { color: #f59e0b; }
+        .text-cur { color: #2563eb; }
+        .text-suf { color: #16a34a; }
+        
+        .info-panel { background: #171717; border: 1px solid #404040; padding: 16px; margin-top: 24px; text-align: center; color: #d4d4d4; font-size: 1rem; line-height: 1.5; }
+        .highlight-text { color: #ffffff; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">Decomposing the Target Number</div>
+        
+        <div class="info-panel">
+            We want to count how many numbers <span class="highlight-text">&le; 45123</span> contain the wave pattern <span class="highlight-text">090</span> at the current position.<br>
+            Multiplier (<span class="text-suf highlight-text">mult</span>) = <span class="highlight-text">10</span>
+        </div>
+
+        <div style="display: flex; gap: 32px; justify-content: center;">
+            <div>
+                <div class="array-container group-prefix">
+                    <div class="array-box">4</div>
+                    <div class="array-box">5</div>
+                </div>
+                <div class="bracket-label text-prefix">Prefix (pre = 45)</div>
+            </div>
+            
+            <div>
+                <div class="array-container group-cur">
+                    <div class="array-box">1</div>
+                    <div class="array-box">2</div>
+                    <div class="array-box">3</div>
+                </div>
+                <div class="bracket-label text-cur">Current 3 Digits (cur = 123)</div>
+            </div>
+
+            <div>
+                <div class="array-container group-suf">
+                    <div class="array-box">3</div>
+                </div>
+                <div class="bracket-label text-suf">Suffix (suf = 3)</div>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
