@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: transparent; display: inline-block; padding: 20px; }
+        .frame { width: 800px; padding: 32px; background: #1e1e1e; border-radius: 12px; border: 1px solid #333; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); color: #d4d4d4; }
+        .frame-title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 28px; letter-spacing: -0.02em; }
+        .legend { display: flex; justify-content: center; gap: 24px; font-size: 0.8rem; color: #9ca3af; border-top: 1px solid #333; padding-top: 16px; margin-top: 28px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .timeline-section { display: flex; flex-direction: column; gap: 32px; }
+        .timeline-row { display: flex; align-items: center; }
+        .row-label { width: 90px; flex-shrink: 0; font-size: 0.85rem; font-weight: 600; color: #9ca3af; }
+        .timeline-axis { flex: 1; height: 44px; position: relative; background-image: linear-gradient(to right, #2a2a2a 1px, transparent 1px); background-size: 30px 100%; border-bottom: 1px solid #444; }
+        .interval-bar { position: absolute; top: 6px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); white-space: nowrap; padding: 0 6px; }
+        .interval-label { position: absolute; top: -22px; font-size: 0.72rem; font-weight: 800; white-space: nowrap; }
+        .wait-line { position: absolute; top: 22px; height: 0; border-top: 2px dashed #ef4444; }
+        .wait-label { position: absolute; top: -16px; font-size: 0.65rem; font-weight: 700; color: #ef4444; white-space: nowrap; transform: translateX(-50%); left: 50%; }
+        .formula { background: #2d2d2d; border-left: 3px solid #0a84ff; border-radius: 4px; padding: 10px 16px; font-size: 0.82rem; color: #d4d4d4; margin-top: 20px; font-family: 'Courier New', monospace; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="frame-title">Scenario A: Fastest Land Ride → Any Water Ride</div>
+
+        <div class="timeline-section">
+
+            <div class="timeline-row">
+                <div class="row-label">Land 1st</div>
+                <div class="timeline-axis">
+                    <!-- minL: [2,6] left=60, width=120 -->
+                    <div class="interval-bar" style="left:60px; width:120px; background:#2cbb5d;">
+                        <span class="interval-label" style="color:#2cbb5d;">minL = 6 ✓</span>
+                        [2, 6]
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-row">
+                <div class="row-label">Water</div>
+                <div class="timeline-axis">
+                    <!-- Wait: 6→6 (immediate, no wait in this case) -->
+                    <!-- Water [6,9]: left=180, width=90 -->
+                    <div class="interval-bar" style="left:180px; width:90px; background:#0a84ff;">
+                        <span class="interval-label" style="color:#0a84ff;">Finish = 9 ✓</span>
+                        [6, 9]
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="formula">
+            finish = max(minL, startW) + durW = max(6, 6) + 3 = <strong style="color:#2cbb5d;">9</strong>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#2cbb5d;"></div>Land (fastest — minL)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#0a84ff;"></div>Water (chosen ride)</div>
+        </div>
+    </div>
+</body>
+</html>

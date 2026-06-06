@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: transparent; display: inline-block; padding: 20px; }
+        .frame { width: 800px; padding: 32px; background: #1e1e1e; border-radius: 12px; border: 1px solid #333; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); color: #d4d4d4; }
+        .frame-title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 28px; letter-spacing: -0.02em; }
+        .legend { display: flex; justify-content: center; gap: 24px; font-size: 0.8rem; color: #9ca3af; border-top: 1px solid #333; padding-top: 16px; margin-top: 28px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .timeline-section { display: flex; flex-direction: column; gap: 32px; }
+        .timeline-row { display: flex; align-items: center; }
+        .row-label { width: 90px; flex-shrink: 0; font-size: 0.85rem; font-weight: 600; color: #9ca3af; }
+        .timeline-axis { flex: 1; height: 44px; position: relative; background-image: linear-gradient(to right, #2a2a2a 1px, transparent 1px); background-size: 30px 100%; border-bottom: 1px solid #444; }
+        .interval-bar { position: absolute; top: 6px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.4); white-space: nowrap; padding: 0 6px; }
+        .interval-label { position: absolute; top: -22px; font-size: 0.72rem; font-weight: 800; white-space: nowrap; }
+        .wait-line { position: absolute; top: 22px; height: 0; border-top: 2px dashed #ef4444; }
+        .wait-label { position: absolute; top: -16px; font-size: 0.65rem; font-weight: 700; color: #ef4444; white-space: nowrap; transform: translateX(-50%); left: 50%; }
+        .formula { background: #2d2d2d; border-left: 3px solid #0a84ff; border-radius: 4px; padding: 10px 16px; font-size: 0.82rem; color: #d4d4d4; margin-top: 20px; font-family: 'Courier New', monospace; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="frame-title">Scenario B: Fastest Water Ride → Any Land Ride</div>
+
+        <div class="timeline-section">
+
+            <div class="timeline-row">
+                <div class="row-label">Water 1st</div>
+                <div class="timeline-axis">
+                    <!-- minW: [6,9] left=180, width=90 -->
+                    <div class="interval-bar" style="left:180px; width:90px; background:#0a84ff;">
+                        <span class="interval-label" style="color:#0a84ff;">minW = 9 ✓</span>
+                        [6, 9]
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-row">
+                <div class="row-label">Land</div>
+                <div class="timeline-axis">
+                    <!-- Wait from 9→9 is 0, so land [8,9] starts at max(9,8)=9 -->
+                    <!-- Actually land ride [8,9] = start=8, dur=1. If we start at t=9, finish=10 -->
+                    <!-- Let's show land ride 1 starting at t=9: left=9*30=270, width=1*30=30 -->
+                    <div class="interval-bar" style="left:270px; width:30px; background:#2cbb5d;">
+                        <span class="interval-label" style="color:#2cbb5d;">Finish = 10</span>
+                        [9,10]
+                    </div>
+                    <!-- Show the original land[8] position for context -->
+                    <div class="interval-bar" style="left:240px; width:3px; background:#4b5563; opacity:0.4;"></div>
+                    <!-- Wait dashed line from minW=9 to startL... no wait since startL=8 < minW=9 -->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="formula">
+            finish = max(minW, startL) + durL = max(9, 8) + 1 = <strong style="color:#f59e0b;">10</strong>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#0a84ff;"></div>Water (fastest — minW)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#2cbb5d;"></div>Land (chosen ride)</div>
+        </div>
+    </div>
+</body>
+</html>
