@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .array-container { display: flex; gap: 16px; margin-bottom: 24px; align-items: center; justify-content: center; }
+        .array-wrapper { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .array-box { width: 64px; height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px solid #525252; background: #171717; font-weight: 700; color: #d4d4d4; }
+        .box-label { font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px; }
+        .box-value { font-size: 1.5rem; }
+        
+        .array-box.valid { border-color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+        .array-box.invalid { border-color: #ef4444; background: rgba(239, 68, 68, 0.1); opacity: 0.6; }
+        
+        .pointer-label { font-size: 0.85rem; font-weight: 700; color: #4ade80; text-align: center; }
+        .pointer-label.invalid { color: #ef4444; }
+        
+        .callout { background: #171717; border-left: 4px solid #f97316; padding: 24px; max-width: 600px; display: flex; flex-direction: column; gap: 12px; margin: 0 auto; }
+        .callout-title { font-weight: 800; font-size: 1.1rem; color: #f97316; text-transform: uppercase; letter-spacing: 0.05em; }
+        .code-inline { font-family: monospace; background: #262626; padding: 4px 8px; border: 1px solid #404040; border-radius: 4px; color: #e5e7eb; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">STEP 1: IDENTIFY CANDIDATE RANGE (n=2, k=3)</div>
+        
+        <div class="callout">
+            <div class="callout-title">Condition 1: abs(n - x) &le; k</div>
+            <div style="font-size: 1rem; color: #d4d4d4; line-height: 1.6;">
+                Instead of checking all numbers, we can restrict our search space:<br>
+                Lower bound: <span class="code-inline">max(1, n - k) &rarr; max(1, 2 - 3) = 1</span><br>
+                Upper bound: <span class="code-inline">n + k &rarr; 2 + 3 = 5</span>
+            </div>
+        </div>
+        
+        <div class="array-container" style="margin-top: 16px;">
+            <div class="array-wrapper">
+                <div class="array-box">
+                    <div class="box-label">x</div>
+                    <div class="box-value">1</div>
+                </div>
+            </div>
+            <div class="array-wrapper">
+                <div class="array-box">
+                    <div class="box-label">x</div>
+                    <div class="box-value">2</div>
+                </div>
+            </div>
+            <div class="array-wrapper">
+                <div class="array-box">
+                    <div class="box-label">x</div>
+                    <div class="box-value">3</div>
+                </div>
+            </div>
+            <div class="array-wrapper">
+                <div class="array-box">
+                    <div class="box-label">x</div>
+                    <div class="box-value">4</div>
+                </div>
+            </div>
+            <div class="array-wrapper">
+                <div class="array-box">
+                    <div class="box-label">x</div>
+                    <div class="box-value">5</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; font-size: 1.1rem; font-weight: 800; color: #f97316;">
+            We only need to iterate x &isin; [1, 5]
+        </div>
+    </div>
+</body>
+</html>
