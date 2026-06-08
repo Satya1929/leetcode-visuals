@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .array-container { display: flex; gap: 16px; margin-bottom: 16px; align-items: center; justify-content: center; }
+        .array-box { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 2px solid #525252; background: #171717; font-weight: 700; font-size: 1.25rem; color: #d4d4d4; }
+        .array-box.active { border-color: #2563eb; color: #2563eb; }
+        .array-box.invalid { border-color: #ef4444; color: #ef4444; background: rgba(239, 68, 68, 0.1); }
+        .array-box.valid { border-color: #4ade80; color: #4ade80; background: rgba(74, 222, 128, 0.1); }
+        
+        .data-table { font-size: 1rem; border-collapse: collapse; text-align: center; margin: 0 auto; }
+        .data-table th { color: #9ca3af; font-weight: 600; padding: 8px 16px; border-bottom: 2px solid #404040; }
+        .data-table td { padding: 12px 16px; border-bottom: 1px solid #404040; color: #d4d4d4; }
+        .data-table tr.highlight-row td { color: #4ade80; font-weight: 700; background: rgba(74, 222, 128, 0.05); }
+        .data-table tr.invalid-row td { color: #ef4444; font-weight: 700; background: rgba(239, 68, 68, 0.05); text-decoration: line-through; }
+        
+        .legend { font-size: 1.1rem; font-weight: 800; color: #4ade80; text-align: center; margin-top: 16px; }
+        .mono { font-family: monospace; font-size: 1.1rem; letter-spacing: 0.2em; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">STEP 1: GENERATE & FILTER (n=3, k=1)</div>
+        
+        <table class="data-table">
+            <tr>
+                <th>String</th>
+                <th>Consecutive 1s?</th>
+                <th>Cost Calculation (Sum of '1' indices)</th>
+                <th>Cost &le; 1?</th>
+                <th>Result</th>
+            </tr>
+            <tr class="highlight-row">
+                <td class="mono">000</td>
+                <td>No</td>
+                <td>0</td>
+                <td>Yes (0)</td>
+                <td>Valid</td>
+            </tr>
+            <tr>
+                <td class="mono">001</td>
+                <td>No</td>
+                <td>2</td>
+                <td>No (2 > 1)</td>
+                <td>Invalid</td>
+            </tr>
+            <tr class="highlight-row">
+                <td class="mono">010</td>
+                <td>No</td>
+                <td>1</td>
+                <td>Yes (1)</td>
+                <td>Valid</td>
+            </tr>
+            <tr class="invalid-row">
+                <td class="mono">011</td>
+                <td>Yes</td>
+                <td>1 + 2 = 3</td>
+                <td>-</td>
+                <td>Invalid</td>
+            </tr>
+            <tr class="highlight-row">
+                <td class="mono">100</td>
+                <td>No</td>
+                <td>0</td>
+                <td>Yes (0)</td>
+                <td>Valid</td>
+            </tr>
+            <tr>
+                <td class="mono">101</td>
+                <td>No</td>
+                <td>0 + 2 = 2</td>
+                <td>No (2 > 1)</td>
+                <td>Invalid</td>
+            </tr>
+            <tr class="invalid-row">
+                <td class="mono">110</td>
+                <td>Yes</td>
+                <td>0 + 1 = 1</td>
+                <td>-</td>
+                <td>Invalid</td>
+            </tr>
+            <tr class="invalid-row">
+                <td class="mono">111</td>
+                <td>Yes</td>
+                <td>0 + 1 + 2 = 3</td>
+                <td>-</td>
+                <td>Invalid</td>
+            </tr>
+        </table>
+        
+        <div class="legend" style="color: #4ade80;">Valid Strings: ["000", "010", "100"]</div>
+    </div>
+</body>
+</html>

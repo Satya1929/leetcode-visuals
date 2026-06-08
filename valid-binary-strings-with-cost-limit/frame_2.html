@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 32px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .tree-level { display: flex; justify-content: center; gap: 64px; align-items: flex-start; }
+        
+        .node { padding: 12px 24px; border: 2px solid #525252; background: #171717; border-radius: 8px; text-align: center; position: relative; }
+        .node-title { font-weight: 800; font-size: 1.25rem; font-family: monospace; letter-spacing: 0.1em; color: #ffffff; margin-bottom: 4px; }
+        .node-sub { font-size: 0.85rem; color: #9ca3af; }
+        
+        .node.valid { border-color: #4ade80; }
+        .node.invalid { border-color: #ef4444; opacity: 0.7; }
+        
+        .edge { position: absolute; background: #525252; z-index: -1; }
+        /* A simple representation since precise SVG is hard without coordinates, we'll use a callout box style instead of literal tree lines to be safe */
+        
+        .callout { background: #171717; border-left: 4px solid #2563eb; padding: 24px; max-width: 600px; display: flex; flex-direction: column; gap: 16px; }
+        .callout-title { font-weight: 800; font-size: 1.1rem; color: #2563eb; text-transform: uppercase; letter-spacing: 0.05em; }
+        .callout-text { font-size: 1rem; color: #d4d4d4; line-height: 1.6; }
+        
+        .code-block { font-family: monospace; background: #262626; padding: 12px; border: 1px solid #404040; color: #e5e7eb; }
+        .highlight-code { color: #4ade80; font-weight: 700; }
+        .prune-code { color: #ef4444; font-weight: 700; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">STEP 2: BACKTRACKING STATE & PRUNING</div>
+        
+        <div class="callout">
+            <div class="callout-title">State Definition</div>
+            <div class="callout-text">
+                <p>We maintain a recursive state: <code>f(ind, cost, last)</code></p>
+                <ul style="list-style-type: disc; margin-left: 24px; margin-top: 8px; margin-bottom: 8px; color: #9ca3af;">
+                    <li><strong style="color: #ffffff;">ind:</strong> Current length of the string being formed</li>
+                    <li><strong style="color: #ffffff;">cost:</strong> Current sum of indices where '1' is placed</li>
+                    <li><strong style="color: #ffffff;">last:</strong> The last character appended (0 or 1)</li>
+                </ul>
+            </div>
+            
+            <div class="code-block">
+                // 1. Cost Pruning<br>
+                <span class="prune-code">if (cost > k) return;</span><br><br>
+                // 2. Base Case: String complete<br>
+                <span class="highlight-code">if (ind == n) { ans.push_back(cur); return; }</span><br><br>
+                // 3. Consecutive '1's Constraint<br>
+                <span class="prune-code">if (last == 0)</span> {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;cur.push_back('1');<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;f(ind + 1, cost + ind, 1);<br>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
