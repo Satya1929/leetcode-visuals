@@ -47,9 +47,9 @@
             </div>
             
             <div class="code-block">
-                // 1. Cost Pruning<br>
+                // 1. Base Case 1 (Pruning)<br>
                 <span class="prune-code">if (cost > k) return;</span><br><br>
-                // 2. Base Case: String complete<br>
+                // 2. Base Case 2 (Success)<br>
                 <span class="highlight-code">if (ind == n) { ans.push_back(cur); return; }</span><br><br>
                 // 3. Consecutive '1's Constraint<br>
                 <span class="prune-code">if (last == 0)</span> {<br>
