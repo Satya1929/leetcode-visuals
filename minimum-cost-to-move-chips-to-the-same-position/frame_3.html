@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .matrix-container { display: flex; gap: 16px; margin-bottom: 32px; align-items: center; justify-content: center; position: relative; margin-top: 40px; }
+        
+        .grid-system { display: flex; flex-direction: column; position: relative; }
+        .grid-header { display: grid; margin-bottom: 8px; text-align: center; font-size: 0.85rem; font-weight: 700; color: #d4d4d4; }
+        .grid-header-col { display: flex; align-items: center; justify-content: center; }
+        .grid-body { display: grid; border: 1px solid #525252; background: #171717; z-index: 2; position: relative; }
+        .grid-cell { border-right: 1px solid #404040; border-bottom: 1px solid #404040; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.25rem; color: #ffffff; }
+        .grid-row:last-child .grid-cell { border-bottom: none; }
+        .grid-cell:last-child { border-right: none; }
+        
+        .block-highlight { background: #4ade80; } /* Green */
+        .block-wait { background: #171717; } /* Empty/Black */
+        
+        .svg-overlay { position: absolute; top: -60px; left: 0; width: 480px; height: 80px; z-index: 10; pointer-events: none; }
+        .arrow-path-cost { stroke: #ef4444; stroke-width: 3; fill: none; stroke-dasharray: 6 4; }
+        .arrow-head-cost { fill: #ef4444; }
+        
+        .cost-label { position: absolute; top: -55px; left: 24px; color: #ef4444; font-weight: 800; font-size: 1rem; }
+
+        .legend { font-size: 1.1rem; font-weight: 800; color: #ffffff; text-align: center; margin-top: 24px; display: flex; justify-content: center; gap: 24px; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-color { width: 16px; height: 16px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">MERGING THE SMALLER GROUP (+/- 1 STEP)</div>
+        <div class="matrix-container">
+            <div class="grid-system">
+                <div class="cost-label">+3 Cost</div>
+                <svg class="svg-overlay" viewBox="0 0 480 80">
+                    <defs>
+                        <marker id="arrow-cost" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto-start-reverse">
+                            <polygon points="0 0, 6 3, 0 6" class="arrow-head-cost" />
+                        </marker>
+                    </defs>
+                    <path class="arrow-path-cost" marker-end="url(#arrow-cost)" d="M 24,68 Q 48,30 72,68" />
+                </svg>
+
+                <div class="grid-header" style="grid-template-columns: repeat(10, 48px);">
+                    <div class="grid-header-col">1</div>
+                    <div class="grid-header-col">2</div>
+                    <div class="grid-header-col">3</div>
+                    <div class="grid-header-col">4</div>
+                    <div class="grid-header-col">5</div>
+                    <div class="grid-header-col">6</div>
+                    <div class="grid-header-col">7</div>
+                    <div class="grid-header-col">8</div>
+                    <div class="grid-header-col">9</div>
+                    <div class="grid-header-col">10</div>
+                </div>
+                <div class="grid-body" style="grid-template-columns: repeat(10, 48px); grid-template-rows: repeat(1, 48px);">
+                    <div class="grid-cell" style="grid-column: 1;"></div>
+                    <div class="grid-cell block-highlight" style="grid-column: 2;">7</div>
+                    <div class="grid-cell" style="grid-column: 3;"></div>
+                    <div class="grid-cell" style="grid-column: 4;"></div>
+                    <div class="grid-cell" style="grid-column: 5;"></div>
+                    <div class="grid-cell" style="grid-column: 6;"></div>
+                    <div class="grid-cell" style="grid-column: 7;"></div>
+                    <div class="grid-cell" style="grid-column: 8;"></div>
+                    <div class="grid-cell" style="grid-column: 9;"></div>
+                    <div class="grid-cell" style="grid-column: 10;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="legend">
+            <div class="legend-item"><div class="legend-color block-highlight"></div> Final Group (Optimal State)</div>
+        </div>
+    </div>
+</body>
+</html>
