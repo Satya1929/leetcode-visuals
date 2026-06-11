@@ -3,70 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
-        .frame { display: inline-flex; flex-direction: column; gap: 30px; padding: 48px; background: #262626; border: 1px solid #404040; position: relative; width: 600px; align-items: center; }
-        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+        body { font-family: 'Inter', sans-serif; background: #262626; padding: 30px; width: max-content; color: #e5e7eb; }
+        .frame { display: flex; flex-direction: column; gap: 40px; padding: 48px; background: #171717; border: 1px solid #404040; border-radius: 16px; width: 800px; align-items: center; }
+        .title { font-size: 1.5rem; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
         
-        .array-row { display: flex; gap: 4px; justify-content: flex-start; width: 264px; }
-        .array-box { width: 60px; height: 60px; border: 2px solid #525252; background: #171717; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: #d4d4d4; }
-        .box-active { background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; color: #93c5fd; }
-        .box-empty { border: 2px dashed #404040; background: transparent; }
+        .array-row { display: flex; position: relative; margin-top: 40px; margin-bottom: 30px; }
+        .array-box { width: 60px; height: 60px; border: 2px solid #525252; background: #262626; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; font-weight: 800; color: #d4d4d4; }
         
-        .row-wrapper { display: flex; align-items: center; gap: 24px; }
-        .row-label { font-family: monospace; font-size: 1.1rem; font-weight: 600; color: #9ca3af; width: 60px; text-align: right; }
+        .box-prefix { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
+        .box-interval { border-color: #10b981; background: rgba(16, 185, 129, 0.1); }
+        
+        .bracket { position: absolute; height: 16px; border: 2px solid; border-top: none; }
+        .bracket-prefix { border-color: #60a5fa; width: 300px; left: 0; top: 68px; }
+        .bracket-interval { border-color: #34d399; width: 240px; left: 300px; top: 68px; }
+        
+        .label { position: absolute; font-weight: 800; font-size: 1.1rem; text-align: center; top: 94px; }
+        .label-prefix { color: #60a5fa; width: 300px; left: 0; }
+        .label-interval { color: #34d399; width: 240px; left: 300px; }
+        
+        .math-row { margin-top: 60px; font-family: monospace; font-size: 1.5rem; font-weight: 800; color: #f3f4f6; display: flex; gap: 16px; align-items: center; }
+        .math-blue { color: #60a5fa; }
+        .math-green { color: #34d399; }
+        
+        .divider { width: 2px; height: 80px; background: #ef4444; position: absolute; left: 300px; top: -10px; z-index: 10; border-radius: 2px;}
+        .divider-label { position: absolute; top: -40px; left: 295px; color: #fca5a5; font-weight: 900; font-size: 1.2rem; }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="title">PREFIX GROWTH</div>
+        <div class="title">The Tabulation Blueprint</div>
         
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="row-wrapper">
-                <div class="row-label">i = 1</div>
-                <div class="array-row">
-                    <div class="array-box box-active">4</div>
-                    <div class="array-box box-empty"></div>
-                    <div class="array-box box-empty"></div>
-                    <div class="array-box box-empty"></div>
-                </div>
-            </div>
+        <div class="array-row">
+            <div class="array-box box-prefix">0</div>
+            <div class="array-box box-prefix">...</div>
+            <div class="array-box box-prefix">...</div>
+            <div class="array-box box-prefix">...</div>
+            <div class="array-box box-prefix">j</div>
             
-            <div class="row-wrapper">
-                <div class="row-label">i = 2</div>
-                <div class="array-row">
-                    <div class="array-box box-active">4</div>
-                    <div class="array-box box-active">1</div>
-                    <div class="array-box box-empty"></div>
-                    <div class="array-box box-empty"></div>
-                </div>
-            </div>
+            <div class="divider"></div>
+            <div class="divider-label">j</div>
             
-            <div class="row-wrapper">
-                <div class="row-label">i = 3</div>
-                <div class="array-row">
-                    <div class="array-box box-active">4</div>
-                    <div class="array-box box-active">1</div>
-                    <div class="array-box box-active">-5</div>
-                    <div class="array-box box-empty"></div>
-                </div>
-            </div>
+            <div class="array-box box-interval">j+1</div>
+            <div class="array-box box-interval">...</div>
+            <div class="array-box box-interval">...</div>
+            <div class="array-box box-interval">i</div>
             
-            <div class="row-wrapper">
-                <div class="row-label">i = 4</div>
-                <div class="array-row">
-                    <div class="array-box box-active">4</div>
-                    <div class="array-box box-active">1</div>
-                    <div class="array-box box-active">-5</div>
-                    <div class="array-box box-active">2</div>
-                </div>
-            </div>
+            <div class="array-box"></div>
+            
+            <div class="bracket bracket-prefix"></div>
+            <div class="bracket bracket-interval"></div>
+            
+            <div class="label label-prefix">Best using (k-1) intervals</div>
+            <div class="label label-interval">Current Interval</div>
         </div>
         
-        <div style="text-align: center; color: #a3a3a3; font-size: 1.1rem; margin-top: 10px;">
-            Each larger prefix is built completely from smaller prefixes.
+        <div class="math-row">
+            <div>dp[k][i] = </div>
+            <div class="math-blue">dp[k-1][j]</div>
+            <div>+</div>
+            <div class="math-green">(pre[i] - pre[j])</div>
         </div>
     </div>
 </body>

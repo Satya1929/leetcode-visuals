@@ -3,60 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
-        .frame { display: inline-flex; flex-direction: column; gap: 40px; padding: 48px; background: #262626; border: 1px solid #404040; position: relative; width: 700px; align-items: center; }
-        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+        body { font-family: 'Inter', sans-serif; background: #262626; padding: 30px; width: max-content; color: #e5e7eb; }
+        .frame { display: flex; flex-direction: column; gap: 30px; padding: 40px; background: #171717; border: 1px solid #404040; border-radius: 16px; width: 750px; }
+        .title { font-size: 1.5rem; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
         
-        .timeline { display: flex; align-items: center; width: 100%; position: relative; height: 100px; }
-        .line { position: absolute; height: 4px; background: #525252; width: 100%; top: 50%; transform: translateY(-50%); z-index: 1; }
+        .compare-row { display: flex; align-items: center; justify-content: space-between; background: #262626; padding: 24px; border-radius: 12px; border: 1px solid #404040; gap: 20px;}
         
-        .segment { position: absolute; height: 32px; top: 50%; transform: translateY(-50%); z-index: 2; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
-        .seg-prev { left: 5%; width: 45%; background: rgba(59, 130, 246, 0.2); border: 2px solid #3b82f6; color: #93c5fd; }
-        .seg-curr { left: 55%; width: 35%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; color: #6ee7b7; }
+        .label { font-size: 1.1rem; font-weight: 800; color: #9ca3af; width: 120px; }
+        .code-box { font-family: monospace; font-size: 1.3rem; font-weight: 800; padding: 12px 20px; border-radius: 8px; background: #1f1f1f; color: #f3f4f6; flex-grow: 1; text-align: center; border: 1px solid #525252; }
         
-        .marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 4px; height: 24px; background: #a3a3a3; z-index: 3; }
-        .marker-label { position: absolute; top: calc(50% + 20px); transform: translateX(-50%); font-weight: 600; font-size: 1rem; color: #d4d4d4; z-index: 3; }
+        .complexity { font-weight: 900; font-size: 1.2rem; padding: 8px 16px; border-radius: 8px; width: 100px; text-align: center; }
+        .comp-bad { color: #f87171; background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); }
+        .comp-good { color: #34d399; background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.2); }
         
-        .top-label { position: absolute; top: calc(50% - 45px); text-align: center; width: 100%; font-weight: 700; font-size: 1rem; }
+        .arrow-down { text-align: center; font-size: 2rem; color: #525252; font-weight: 900; }
+        
+        .highlight { color: #60a5fa; }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="title">THE INTERVAL SPLIT</div>
+        <div class="title">The Prefix Optimization</div>
         
-        <div class="timeline">
-            <div class="line"></div>
-            
-            <div class="segment seg-prev">
-                <div class="top-label" style="color: #60a5fa;">dp[k-1][j]</div>
-                Previous Prefix
-            </div>
-            
-            <div class="segment seg-curr">
-                <div class="top-label" style="color: #34d399;">sum(j+1...i)</div>
-                Current Interval
-            </div>
-            
-            <!-- Markers -->
-            <div class="marker" style="left: 5%;"></div>
-            <div class="marker-label" style="left: 5%;">0</div>
-            
-            <div class="marker" style="left: 50%;"></div>
-            <div class="marker-label" style="left: 50%;">j</div>
-            
-            <div class="marker" style="left: 55%;"></div>
-            <div class="marker-label" style="left: 55%;">j+1</div>
-            
-            <div class="marker" style="left: 90%;"></div>
-            <div class="marker-label" style="left: 90%;">i</div>
+        <div class="compare-row">
+            <div class="label">Before</div>
+            <div class="code-box">sum(i...i+len-1)</div>
+            <div class="complexity comp-bad">O(len)</div>
         </div>
         
-        <div style="text-align: center; color: #a3a3a3; font-size: 1.1rem;">
-            Once the current interval <span style="color:#10b981; font-weight: 700;">[j+1 ... i]</span> is fixed,<br>
-            the previous part <span style="color:#3b82f6; font-weight: 700;">[0 ... j]</span> becomes completely independent.
+        <div class="arrow-down">↓</div>
+        
+        <div class="compare-row" style="border-color: #3b82f6; background: rgba(59, 130, 246, 0.05);">
+            <div class="label" style="color: #60a5fa;">After</div>
+            <div class="code-box" style="border-color: #60a5fa;">pre[<span class="highlight">i+len</span>] - pre[<span class="highlight">i</span>]</div>
+            <div class="complexity comp-good">O(1)</div>
         </div>
     </div>
 </body>

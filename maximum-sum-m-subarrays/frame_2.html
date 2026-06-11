@@ -3,53 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
-        .frame { display: inline-flex; flex-direction: column; gap: 40px; padding: 48px; background: #262626; border: 1px solid #404040; position: relative; width: 600px; align-items: center; }
-        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+        body { font-family: 'Inter', sans-serif; background: #262626; padding: 30px; width: max-content; color: #e5e7eb; }
+        .frame { display: flex; flex-direction: column; gap: 40px; padding: 48px; background: #171717; border: 1px solid #404040; border-radius: 16px; width: 700px; align-items: center; }
+        .title { font-size: 1.5rem; font-weight: 900; color: #ffffff; text-transform: uppercase; letter-spacing: 0.1em; text-align: center; }
         
-        .path-box { background: #3f3f46; border: 1px solid #525252; padding: 16px 24px; border-radius: 8px; font-weight: 700; color: #d4d4d4; text-align: center; }
-        .target-box { background: #3b82f6; border: 2px solid #60a5fa; padding: 20px 40px; border-radius: 12px; font-weight: 800; font-size: 1.4rem; color: white; text-align: center; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); z-index: 10; }
+        .tree { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; }
         
-        .paths-container { display: flex; gap: 60px; justify-content: center; position: relative; }
+        .node { padding: 16px 32px; background: #262626; border: 2px solid #525252; border-radius: 8px; font-size: 1.25rem; font-weight: 800; color: #f3f4f6; font-family: monospace; z-index: 10; position: relative;}
+        .node-root { border-color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
+        .node-leaf { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); }
         
-        .arrow-line { position: absolute; border-left: 2px solid #6b7280; border-bottom: 2px solid #6b7280; width: 50%; height: 60px; }
+        .branches { display: flex; justify-content: space-between; width: 450px; margin-top: 60px; position: relative; }
+        
+        .line-left { position: absolute; width: 2px; height: 80px; background: #525252; top: -75px; left: 50%; transform: rotate(35deg); transform-origin: top left; }
+        .line-right { position: absolute; width: 2px; height: 80px; background: #525252; top: -75px; right: 50%; transform: rotate(-35deg); transform-origin: top right; }
+        
+        .label { position: absolute; top: -40px; font-weight: 800; font-size: 0.9rem; color: #9ca3af; background: #171717; padding: 4px 8px; border-radius: 4px; }
+        .label-left { left: 10%; }
+        .label-right { right: 10%; }
+        
+        .leaf-wrapper { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .leaf-desc { font-size: 0.85rem; font-weight: 600; color: #6ee7b7; background: rgba(16, 185, 129, 0.1); padding: 4px 12px; border-radius: 12px; }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="title">OVERLAPPING SUBPROBLEMS</div>
+        <div class="title">The Decision Tree</div>
         
-        <div class="paths-container">
-            <div class="path-box">Path A<br><span style="font-size: 0.8rem; font-weight: 400; color:#9ca3af;">(Skip pos 11)</span></div>
-            <div class="path-box">Path B<br><span style="font-size: 0.8rem; font-weight: 400; color:#9ca3af;">(Interval [11,11])</span></div>
-            <div class="path-box">Path C<br><span style="font-size: 0.8rem; font-weight: 400; color:#9ca3af;">(Interval [11,12])</span></div>
+        <div class="tree">
+            <div class="node node-root">solve(i, k)</div>
             
-            <svg style="position: absolute; top: 60px; left: 0; width: 100%; height: 80px;" overflow="visible">
-                <!-- Arrow from A -->
-                <path d="M 60,0 C 60,40 230,40 230,80" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)" />
-                <!-- Arrow from B -->
-                <path d="M 252,0 L 252,80" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)" />
-                <!-- Arrow from C -->
-                <path d="M 444,0 C 444,40 274,40 274,80" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)" />
+            <div class="branches">
+                <div class="line-left"></div>
+                <div class="line-right"></div>
                 
-                <defs>
-                    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280" />
-                    </marker>
-                </defs>
-            </svg>
+                <div class="label label-left">Skip i</div>
+                <div class="label label-right">Take len ∈ [l,r]</div>
+                
+                <div class="leaf-wrapper">
+                    <div class="node node-leaf">solve(i+1, k)</div>
+                    <div class="leaf-desc">k remains same</div>
+                </div>
+                
+                <div class="leaf-wrapper">
+                    <div class="node node-leaf">solve(i+len, k-1)</div>
+                    <div class="leaf-desc">+ sum(i...i+len-1)</div>
+                </div>
+            </div>
         </div>
-        
-        <div style="height: 40px;"></div>
-        
-        <div class="target-box">
-            f(10, 3)
-            <div style="font-size: 0.9rem; font-weight: 500; margin-top: 8px; color: #bfdbfe;">Same state. Same answer. Repeated work.</div>
-        </div>
-        
     </div>
 </body>
 </html>
