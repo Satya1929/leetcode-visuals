@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; width: 800px; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .timeline-section { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; position: relative; padding-top: 40px; }
+        .timeline-row { position: relative; height: 48px; display: flex; align-items: center; border-bottom: 1px dashed #525252; width: 600px; margin-left: 90px; }
+        .row-label { position: absolute; left: -90px; width: 80px; text-align: right; font-weight: 700; color: #a3a3a3; font-size: 0.9rem; }
+        
+        .interval-bar { position: absolute; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #ffffff; font-size: 0.85rem; border-radius: 4px; border: 1px solid rgba(0,0,0,0.2); }
+        .bg-slate { background: #475569; }
+        .bg-green { background: #16a34a; }
+        .bg-blue { background: #2563eb; }
+        
+        .bracket { position: absolute; height: 12px; border-top: 2px solid #e5e7eb; border-left: 2px solid #e5e7eb; border-right: 2px solid #e5e7eb; }
+        .bracket-label { position: absolute; text-align: center; font-weight: 700; font-size: 1rem; color: #4ade80; }
+        
+        .sync-line { position: absolute; border-left: 2px dashed #f59e0b; top: 0; bottom: -20px; z-index: 0; }
+        .pointer { position: absolute; bottom: -24px; font-weight: 800; color: #f59e0b; transform: translateX(-50%); font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">SPLITTING THE PREFIX</div>
+        
+        <div class="timeline-section">
+            <!-- Bracket for Prefix 0...j -->
+            <div class="bracket" style="width: 330px; left: 90px; top: 15px;"></div>
+            <div class="bracket-label" style="width: 330px; left: 90px; top: -10px;">dp[k-1][j]</div>
+            
+            <!-- Bracket for current interval -->
+            <div class="bracket" style="width: 150px; left: 450px; top: 15px; border-color: #60a5fa;"></div>
+            <div class="bracket-label" style="width: 150px; left: 450px; top: -10px; color: #60a5fa;">sum(j+1...i)</div>
+            
+            <!-- Sync Line at j -->
+            <div class="sync-line" style="left: 435px;"></div>
+            <div class="pointer" style="left: 435px; top: -25px;">j</div>
+            <div class="pointer" style="left: 615px; top: -25px; color: #60a5fa;">i</div>
+
+            <div class="timeline-row">
+                <div class="row-label">Prefix</div>
+                <!-- 1 time unit = 30px. Start=0, Dur=3 -> left:0, width:90 -->
+                <div class="interval-bar bg-slate" style="left: 30px; width: 90px;">I₁</div>
+                <div class="interval-bar bg-slate" style="left: 180px; width: 120px;">Iₖ₋₁</div>
+            </div>
+            
+            <div class="timeline-row">
+                <div class="row-label">Current</div>
+                <div class="interval-bar bg-blue" style="left: 360px; width: 150px;">Iₖ</div>
+            </div>
+            
+            <div style="text-align: center; color: #d4d4d4; font-size: 1.1rem; margin-top: 20px;">
+                Total Sum = <b style="color: #4ade80;">dp[k-1][j]</b> + <b style="color: #60a5fa;">(pre[i] - pre[j])</b>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

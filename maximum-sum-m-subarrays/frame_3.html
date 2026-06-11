@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
+        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; width: 800px; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+        
+        .array-container { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 32px; position: relative; }
+        .array-row { display: flex; gap: 4px; }
+        .array-box { width: 48px; height: 48px; border: 2px solid #525252; background: #171717; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: #d4d4d4; position: relative; }
+        
+        .box-highlight { background: #f59e0b; border-color: #fbbf24; color: #ffffff; }
+        
+        .pointer { position: absolute; display: flex; flex-direction: column; align-items: center; font-weight: 800; font-size: 1rem; }
+        .pointer.up::before { content: '↑'; font-size: 1.5rem; margin-bottom: -4px; }
+        .pointer.down::after { content: '↓'; font-size: 1.5rem; margin-top: -4px; }
+        
+        .range-box { position: absolute; border: 2px dashed #fbbf24; background: rgba(245, 158, 11, 0.1); height: 56px; top: -4px; z-index: 10; pointer-events: none; }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="title">SLIDING WINDOW FOR VALID j</div>
+        
+        <div class="array-container">
+            <div style="position: relative; width: 100%; display: flex; justify-content: center; padding: 40px 0;">
+                <div style="position: relative; display: flex; gap: 4px;">
+                    <div class="array-box"></div>
+                    <div class="array-box"></div>
+                    
+                    <!-- Valid Range Window -->
+                    <div class="range-box" style="width: 204px; left: 104px;"></div>
+                    <div style="position: absolute; top: -40px; left: 104px; width: 204px; text-align: center; color: #fbbf24; font-weight: 700;">Valid j range</div>
+                    
+                    <div class="array-box box-highlight"></div>
+                    <div class="array-box box-highlight"></div>
+                    <div class="array-box box-highlight"></div>
+                    <div class="array-box box-highlight"></div>
+                    
+                    <div class="array-box"></div>
+                    <div class="array-box"></div>
+                    <div class="array-box" style="border-color: #60a5fa;">i</div>
+                    
+                    <!-- Pointers -->
+                    <div class="pointer up" style="left: 110px; bottom: -30px; color: #fbbf24;">i - r</div>
+                    <div class="pointer up" style="left: 266px; bottom: -30px; color: #fbbf24;">i - l</div>
+                    <div class="pointer up" style="left: 422px; bottom: -30px; color: #60a5fa;">i</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; color: #d4d4d4; font-size: 1.1rem;">
+                Since <b style="color: #60a5fa;">l &le; length &le; r</b>, the previous interval must have ended<br>somewhere between <b style="color: #fbbf24;">i - r</b> and <b style="color: #fbbf24;">i - l</b>.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
