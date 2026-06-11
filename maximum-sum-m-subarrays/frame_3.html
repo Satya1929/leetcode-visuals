@@ -7,55 +7,56 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Inter', sans-serif; background: #262626; display: flex; align-items: flex-start; justify-content: flex-start; padding: 20px; width: max-content; color: #e5e7eb; }
-        .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; width: 800px; }
-        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
+        .frame { display: inline-flex; flex-direction: column; gap: 40px; padding: 48px; background: #262626; border: 1px solid #404040; position: relative; width: 700px; align-items: center; }
+        .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        .array-container { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 32px; position: relative; }
-        .array-row { display: flex; gap: 4px; }
-        .array-box { width: 48px; height: 48px; border: 2px solid #525252; background: #171717; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: #d4d4d4; position: relative; }
+        .timeline { display: flex; align-items: center; width: 100%; position: relative; height: 100px; }
+        .line { position: absolute; height: 4px; background: #525252; width: 100%; top: 50%; transform: translateY(-50%); z-index: 1; }
         
-        .box-highlight { background: #f59e0b; border-color: #fbbf24; color: #ffffff; }
+        .segment { position: absolute; height: 32px; top: 50%; transform: translateY(-50%); z-index: 2; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
+        .seg-prev { left: 5%; width: 45%; background: rgba(59, 130, 246, 0.2); border: 2px solid #3b82f6; color: #93c5fd; }
+        .seg-curr { left: 55%; width: 35%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; color: #6ee7b7; }
         
-        .pointer { position: absolute; display: flex; flex-direction: column; align-items: center; font-weight: 800; font-size: 1rem; }
-        .pointer.up::before { content: '↑'; font-size: 1.5rem; margin-bottom: -4px; }
-        .pointer.down::after { content: '↓'; font-size: 1.5rem; margin-top: -4px; }
+        .marker { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 4px; height: 24px; background: #a3a3a3; z-index: 3; }
+        .marker-label { position: absolute; top: calc(50% + 20px); transform: translateX(-50%); font-weight: 600; font-size: 1rem; color: #d4d4d4; z-index: 3; }
         
-        .range-box { position: absolute; border: 2px dashed #fbbf24; background: rgba(245, 158, 11, 0.1); height: 56px; top: -4px; z-index: 10; pointer-events: none; }
+        .top-label { position: absolute; top: calc(50% - 45px); text-align: center; width: 100%; font-weight: 700; font-size: 1rem; }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="title">SLIDING WINDOW FOR VALID j</div>
+        <div class="title">THE INTERVAL SPLIT</div>
         
-        <div class="array-container">
-            <div style="position: relative; width: 100%; display: flex; justify-content: center; padding: 40px 0;">
-                <div style="position: relative; display: flex; gap: 4px;">
-                    <div class="array-box"></div>
-                    <div class="array-box"></div>
-                    
-                    <!-- Valid Range Window -->
-                    <div class="range-box" style="width: 204px; left: 104px;"></div>
-                    <div style="position: absolute; top: -40px; left: 104px; width: 204px; text-align: center; color: #fbbf24; font-weight: 700;">Valid j range</div>
-                    
-                    <div class="array-box box-highlight"></div>
-                    <div class="array-box box-highlight"></div>
-                    <div class="array-box box-highlight"></div>
-                    <div class="array-box box-highlight"></div>
-                    
-                    <div class="array-box"></div>
-                    <div class="array-box"></div>
-                    <div class="array-box" style="border-color: #60a5fa;">i</div>
-                    
-                    <!-- Pointers -->
-                    <div class="pointer up" style="left: 110px; bottom: -30px; color: #fbbf24;">i - r</div>
-                    <div class="pointer up" style="left: 266px; bottom: -30px; color: #fbbf24;">i - l</div>
-                    <div class="pointer up" style="left: 422px; bottom: -30px; color: #60a5fa;">i</div>
-                </div>
+        <div class="timeline">
+            <div class="line"></div>
+            
+            <div class="segment seg-prev">
+                <div class="top-label" style="color: #60a5fa;">dp[k-1][j]</div>
+                Previous Prefix
             </div>
             
-            <div style="text-align: center; color: #d4d4d4; font-size: 1.1rem;">
-                Since <b style="color: #60a5fa;">l &le; length &le; r</b>, the previous interval must have ended<br>somewhere between <b style="color: #fbbf24;">i - r</b> and <b style="color: #fbbf24;">i - l</b>.
+            <div class="segment seg-curr">
+                <div class="top-label" style="color: #34d399;">sum(j+1...i)</div>
+                Current Interval
             </div>
+            
+            <!-- Markers -->
+            <div class="marker" style="left: 5%;"></div>
+            <div class="marker-label" style="left: 5%;">0</div>
+            
+            <div class="marker" style="left: 50%;"></div>
+            <div class="marker-label" style="left: 50%;">j</div>
+            
+            <div class="marker" style="left: 55%;"></div>
+            <div class="marker-label" style="left: 55%;">j+1</div>
+            
+            <div class="marker" style="left: 90%;"></div>
+            <div class="marker-label" style="left: 90%;">i</div>
+        </div>
+        
+        <div style="text-align: center; color: #a3a3a3; font-size: 1.1rem;">
+            Once the current interval <span style="color:#10b981; font-weight: 700;">[j+1 ... i]</span> is fixed,<br>
+            the previous part <span style="color:#3b82f6; font-weight: 700;">[0 ... j]</span> becomes completely independent.
         </div>
     </div>
 </body>

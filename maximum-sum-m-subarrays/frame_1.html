@@ -10,49 +10,57 @@
         .frame { display: inline-flex; flex-direction: column; gap: 48px; padding: 32px 48px; background: #262626; border: 1px solid #404040; position: relative; width: 800px; }
         .title { font-size: 1.15rem; font-weight: 800; color: #ffffff; text-align: center; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        .array-container { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-bottom: 32px; position: relative; }
-        .array-row { display: flex; gap: 4px; }
-        .array-box { width: 64px; height: 64px; border: 2px solid #525252; background: #171717; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: #d4d4d4; position: relative; }
+        .array-container { display: flex; flex-direction: column; align-items: center; gap: 40px; position: relative; }
+        .array-row { display: flex; gap: 8px; position: relative; }
+        .array-box { width: 64px; height: 64px; border: 2px solid #525252; background: #171717; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: #d4d4d4; }
         
-        .interval-green { background: #16a34a; border-color: #4ade80; color: #ffffff; }
-        .interval-blue { background: #2563eb; border-color: #60a5fa; color: #ffffff; }
+        .box-red { background: #ef4444; border-color: #f87171; color: white; }
+        .box-green { background: #16a34a; border-color: #4ade80; color: white; }
         
-        .bracket { position: absolute; top: -30px; border-top: 2px solid #e5e7eb; border-left: 2px solid #e5e7eb; border-right: 2px solid #e5e7eb; height: 16px; }
-        .bracket-label { position: absolute; top: -56px; font-weight: 700; color: #e5e7eb; text-align: center; width: 100%; font-size: 1.1rem; }
+        .bracket { position: absolute; border-top: 2px solid; border-left: 2px solid; border-right: 2px solid; height: 16px; top: -24px; }
+        .bracket-label { position: absolute; text-align: center; font-weight: 700; font-size: 1rem; top: -50px; width: 100%; }
         
-        .pointer { position: absolute; bottom: -36px; display: flex; flex-direction: column; align-items: center; color: #f59e0b; font-weight: 800; font-size: 1.1rem; }
-        .pointer::before { content: '↑'; font-size: 1.5rem; margin-bottom: -4px; }
+        .row-label { position: absolute; left: -140px; top: 20px; font-weight: 800; font-size: 1.1rem; color: #9ca3af; }
     </style>
 </head>
 <body>
     <div class="frame">
-        <div class="title">STATE DEFINITION: dp[k][i]</div>
+        <div class="title">WHY GREEDY FAILS</div>
         
         <div class="array-container">
-            <div style="position: relative; width: 100%; display: flex; justify-content: center;">
-                <div style="position: relative; display: flex; gap: 4px;">
-                    <!-- Bracket over prefix [1...i] -->
-                    <div class="bracket" style="width: 540px; left: 0;"></div>
-                    <div class="bracket-label" style="width: 540px; left: 0;">Prefix Array [1 ... i]</div>
-                    
-                    <div class="array-box">...</div>
-                    <div class="array-box interval-green">I₁</div>
-                    <div class="array-box interval-green">I₁</div>
-                    <div class="array-box">...</div>
-                    <div class="array-box interval-blue">I₂</div>
-                    <div class="array-box interval-blue">I₂</div>
-                    <div class="array-box interval-blue">I₂</div>
-                    <div class="array-box">...</div>
-                    <div class="array-box interval-green">Iₖ</div>
-                    <div class="array-box interval-green">Iₖ</div>
-                    
-                    <!-- Pointer at i -->
-                    <div class="pointer" style="left: 628px;">i</div>
-                </div>
+            <!-- Greedy Row -->
+            <div class="array-row">
+                <div class="row-label" style="color: #ef4444;">GREEDY:</div>
+                <div class="array-box box-red">5</div>
+                <div class="array-box box-red">5</div>
+                <div class="array-box box-red">-100</div>
+                <div class="array-box box-red">5</div>
+                <div class="array-box box-red">5</div>
+                
+                <div class="bracket" style="width: 352px; border-color: #ef4444;"></div>
+                <div class="bracket-label" style="color: #ef4444;">Takes largest immediate window (Sum: -80)</div>
             </div>
-            <div style="margin-top: 40px; font-size: 1.2rem; text-align: center; color: #a3a3a3;">
-                <b style="color: #4ade80;">dp[k][i]</b> = Max sum using exactly <b style="color: #ffffff;">k</b> intervals inside the first <b style="color: #ffffff;">i</b> elements.
+            
+            <!-- Optimal Row -->
+            <div class="array-row" style="margin-top: 20px;">
+                <div class="row-label" style="color: #4ade80;">OPTIMAL:</div>
+                <div class="array-box box-green">5</div>
+                <div class="array-box box-green">5</div>
+                <div class="array-box">-100</div>
+                <div class="array-box box-green">5</div>
+                <div class="array-box box-green">5</div>
+                
+                <div class="bracket" style="width: 136px; left: 0; border-color: #4ade80;"></div>
+                <div class="bracket-label" style="width: 136px; left: 0; color: #4ade80;">Sum: 10</div>
+                
+                <div class="bracket" style="width: 136px; left: 216px; border-color: #4ade80;"></div>
+                <div class="bracket-label" style="width: 136px; left: 216px; color: #4ade80;">Sum: 10</div>
             </div>
+        </div>
+        
+        <div style="text-align: center; color: #d4d4d4; font-size: 1.1rem; margin-top: -10px;">
+            Taking the currently best-looking interval blocks better combinations later.<br>
+            <b style="color: #f87171;">Local optimum ≠ Global optimum</b>
         </div>
     </div>
 </body>
